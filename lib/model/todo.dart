@@ -1,34 +1,30 @@
+import 'dart:convert';
+
+List<ToDo> toDoJsonPlaceholderFromJson(String str) =>
+    List<ToDo>.from(json.decode(str).map((x) => ToDo.fromJson(x)));
+
+String postToJson(List<ToDo> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class ToDo {
-  String id;
-  String todoText;
-  bool isDone;
+  ToDo(
+      {required this.id,
+      required this.userId,
+      required this.title,
+      required this.completed});
 
-  ToDo({
-    required this.id,
-    required this.todoText,
-    this.isDone = false,
-  });
+  int id;
+  int userId;
+  String title;
+  bool completed;
 
-  static List<ToDo> todoList() {
-    return [
-      ToDo(id: '01', todoText: 'Exercícios matinais', isDone: true),
-      ToDo(id: '02', todoText: 'Fazer as compras', isDone: true),
-      ToDo(
-        id: '03',
-        todoText: 'Checar E-mails',
-      ),
-      ToDo(
-        id: '04',
-        todoText: 'Reunião do time',
-      ),
-      ToDo(
-        id: '05',
-        todoText: 'Desenvolver aplicativo de dispositivos móveis',
-      ),
-      ToDo(
-        id: '06',
-        todoText: 'Jantar com os pais',
-      ),
-    ];
-  }
+  factory ToDo.fromJson(Map<String, dynamic> json) => ToDo(
+        id: json["id"],
+        userId: json["userId"],
+        title: json["title"],
+        completed: json["completed"],
+      );
+
+  Map<String, dynamic> toJson() =>
+      {"id": id, "userId": userId, "title": title, "completed": completed};
 }

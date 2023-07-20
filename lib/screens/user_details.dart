@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/constants/colors.dart';
+import 'package:todo/screens/user_todo_data.dart';
 
 class UserDetails extends StatelessWidget {
   final String userName;
@@ -14,6 +15,12 @@ class UserDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _pushToUserTodoData() {
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return UserTodoData();
+      }));
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -61,7 +68,17 @@ class UserDetails extends StatelessWidget {
                     color: tdBlack,
                     fontSize: 20,
                     fontWeight: FontWeight.normal),
-              )
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                  child: Text(
+                    'Ver dados de tarefas',
+                  ),
+                  onPressed: _pushToUserTodoData,
+                  style: ElevatedButton.styleFrom(
+                      primary: tdBlue,
+                      minimumSize: Size(60, 60),
+                      elevation: 10))
             ],
           )
         ],
